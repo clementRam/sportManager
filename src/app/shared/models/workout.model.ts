@@ -1,4 +1,4 @@
-import { Muscle } from './muscle';
+import { Muscle } from './muscle.model';
 
 export interface Workout {
     id: string;

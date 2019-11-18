@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Muscle } from 'src/app/shared/models/muscle';
+import { Muscle } from 'src/app/shared/models/muscle.model';
 
 @Component({
   selector: 'app-muscle',

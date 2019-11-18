@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkoutService } from 'src/app/shared/services/workout.service';
-import { Workout } from 'src/app/shared/models/workout';
+import { Workout } from 'src/app/shared/models/workout.model';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { WorkoutDialogComponent } from '../workout-dialog/workout-dialog.component';

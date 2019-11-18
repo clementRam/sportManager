@@ -1,0 +1,13 @@
+div.container{
+    display: flex;
+    justify-content: center;
+
+    mat-card{
+        width: auto;
+        padding: 40px 100px;
+    
+        mat-card-actions{
+            text-align: center;
+        }
+    }
+}

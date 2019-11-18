@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { WorkoutsComponent } from './components/workouts/workouts.component';
 
 const routes: Routes = [
-  { path: '', component: WorkoutsComponent },
+  { 
+    path: '', 
+    component: WorkoutsComponent
+   },
 ];
 
 @NgModule({
