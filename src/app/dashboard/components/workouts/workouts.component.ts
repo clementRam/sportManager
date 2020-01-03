@@ -4,6 +4,10 @@ import { Workout } from 'src/app/shared/models/workout.model';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { WorkoutDialogComponent } from '../workout-dialog/workout-dialog.component';
+import { MuscleFormDialogComponent } from '../muscle-form-dialog/muscle-form-dialog.component';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Store, DefaultStoreDataNames } from 'src/app/shared/store/store';
 
 @Component({
   selector: 'app-workouts',
@@ -12,12 +16,12 @@ import { WorkoutDialogComponent } from '../workout-dialog/workout-dialog.compone
 })
 export class WorkoutsComponent implements OnInit {
 
-  workouts: Workout[];
+  workouts$: Observable<Workout[]>;
 
   constructor(private workoutService: WorkoutService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.workoutService.getWorkouts().subscribe(workouts => this.workouts = workouts);
+    this.workouts$ = this.workoutService.getWorkouts();
   }
 
   public drop(event: CdkDragDrop<string[]>): void {
@@ -29,6 +33,10 @@ export class WorkoutsComponent implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
     }
+  }
+
+  public openAddMuscleDialog(){
+    this.dialog.open(MuscleFormDialogComponent);
   }
 
   public openDialogEditWorkout(workout?: Workout): void{

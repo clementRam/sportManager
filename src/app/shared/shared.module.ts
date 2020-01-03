@@ -12,23 +12,25 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
+    HttpClientModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
     MatInputModule,
     ReactiveFormsModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule
   ],
   exports: [
+    HttpClientModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
@@ -36,7 +38,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatCardModule,
     ReactiveFormsModule,
     MatMenuModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

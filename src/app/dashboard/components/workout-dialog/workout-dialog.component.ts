@@ -35,9 +35,9 @@ export class WorkoutDialogComponent implements OnInit {
     if(this.workoutForm.valid){
       if(this.workout) {
         const workoutUpdated = {...this.workout, ...this.workoutForm.value};
-        this.workoutService.updateWorkout(workoutUpdated).then(() => this.dialogRef.close());
+        this.workoutService.updateWorkout(workoutUpdated).subscribe(() => this.dialogRef.close());
       } else {
-        this.workoutService.addWorkout(this.workoutForm.value).then(() => this.dialogRef.close());
+        this.workoutService.addWorkout(this.workoutForm.value).subscribe(() => this.dialogRef.close());
       }
     } else {
       this.workoutForm.markAllAsTouched();

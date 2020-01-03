@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  apiUrl: 'http://raspberry-back/workout-manager',
   firebase: {
     apiKey: "AIzaSyBvjPbTnxNmSOba0dg1I6BC5gadn-TdG1M",
     authDomain: "sportmanager-4a36e.firebaseapp.com",

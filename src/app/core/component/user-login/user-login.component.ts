@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-user-login',
@@ -14,7 +16,7 @@ export class UserLoginComponent implements OnInit {
     password: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private authService: AuthService){
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router){
 
   }
 
@@ -23,7 +25,7 @@ export class UserLoginComponent implements OnInit {
 
   public onSubmit(): void {
     if(this.userForm.valid) {
-      this.authService.signIn(this.userForm.value);
+      this.authService.signIn(this.userForm.value).subscribe(() => this.router.navigate(['/dashboard']));
     } else{
       this.userForm.markAllAsTouched();
     }

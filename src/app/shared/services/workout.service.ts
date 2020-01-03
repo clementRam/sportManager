@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Workout } from '../models/workout.model';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Store, DefaultStoreDataNames } from '../store/store';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,37 +12,25 @@ import { Observable } from 'rxjs';
 
 export class WorkoutService {
 
-  private workoutLastIndex: number;
-
-  constructor(private db: AngularFirestore) { }
+  constructor(private store: Store, private http: HttpClient) { }
 
   public getWorkouts(): Observable<Workout[]>{
-    return this.db.collection<Workout>('workout', ref => ref.orderBy('index', 'asc')).snapshotChanges().pipe((map(r => {
-      this.workoutLastIndex = r[r.length - 1].payload.doc.data().index | 0;
-      return r.map(d => {
-        return {
-          id: d.payload.doc.id,
-          ...d.payload.doc.data()
-        }
-      })}
-    )));
+    return this.http.get<Workout[]>(`${environment.apiUrl}/workouts`).pipe(
+      map((workouts: Workout[]) => {
+        this.store.set(DefaultStoreDataNames.WORKOUTS, workouts);
+        return workouts;
+    }));;
   }
 
-  public addWorkout(workout: Partial<Workout>): Promise<DocumentReference> {
-    workout.index = this.getNextWorkoutIndex();
-    workout.muscles = [];
-    return this.db.collection<Partial<Workout>>('workout').add(workout);
+  public addWorkout(workout: Partial<Workout>): Observable<Workout> {
+    return this.http.post<Workout>(`${environment.apiUrl}/workouts`, workout);
   }
 
-  public updateWorkout(workout: Workout){
-    return this.db.doc<Workout>(`/workout/${workout.id}`).update(workout);
+  public updateWorkout(workout: Workout): Observable<Workout>{
+    return this.http.put<Workout>(`${environment.apiUrl}/workouts/${workout.id}`, workout);
   }
 
-  public deleteWorkout(id: string): Promise<void>{
-    return this.db.doc<Workout>(`/workout/${id}`).delete();
-  }
-
-  private getNextWorkoutIndex(): number{
-    return this.workoutLastIndex + 1;
+  public deleteWorkout(id: string): Observable<Workout>{
+    return this.http.delete<Workout>(`${environment.apiUrl}/workouts/${id}`);
   }
 }

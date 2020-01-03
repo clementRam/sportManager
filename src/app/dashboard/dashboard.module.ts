@@ -7,9 +7,15 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatCardModule} from '@angular/material/card';
 import { SharedModule } from '../shared/shared.module';
 import { WorkoutDialogComponent } from './components/workout-dialog/workout-dialog.component';
+import { MuscleFormDialogComponent } from './components/muscle-form-dialog/muscle-form-dialog.component';
 
 @NgModule({
-  declarations: [MuscleComponent, WorkoutsComponent, WorkoutDialogComponent],
+  declarations: [
+    MuscleComponent, 
+    WorkoutsComponent, 
+    WorkoutDialogComponent,
+    MuscleFormDialogComponent
+  ],
   imports: [
     DashboardRoutingModule,
     CommonModule,
@@ -18,7 +24,8 @@ import { WorkoutDialogComponent } from './components/workout-dialog/workout-dial
     SharedModule
   ],
   entryComponents: [
-    WorkoutDialogComponent
+    WorkoutDialogComponent,
+    MuscleFormDialogComponent
   ]
 })
 export class DashboardModule { }

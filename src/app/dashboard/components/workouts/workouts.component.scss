@@ -1,14 +1,15 @@
 .workout-list-container{
     display: flex;
     flex-wrap: wrap;
-    max-width: 100%;
 }
 
-.workout-container{
-    min-width: 250px;
+.grid{
+    padding: 2.5%;
+}
+
+.workout-container, .btn-container{
+    width: 250px;
     display: inline-block;
-    padding: 15px;
-    margin-bottom: 30px;
 }
 
 .muscles-container{
@@ -30,3 +31,25 @@
 .muscles-container{
     min-height: 100px;
 }
+
+button.btn-add-muscle{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+@media screen and (max-width: 589px) {
+    .grid{
+        width: 45%;
+    }
+    .workout-container {
+        width: 100%;
+    }
+    .btn-container{
+        display: flex;
+        width: 100%;
+        button {
+            margin: auto;
+        }
+    }
+  }

@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiUrl: "localhost:8080/workout-manager",
   firebase: {
     apiKey: "AIzaSyBvjPbTnxNmSOba0dg1I6BC5gadn-TdG1M",
     authDomain: "sportmanager-4a36e.firebaseapp.com",
