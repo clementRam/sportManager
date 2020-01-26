@@ -6,12 +6,14 @@ import { Injectable } from '@angular/core';
 
 const initState: State = {
     muscles: undefined,
-    workouts: undefined
+    workouts: undefined,
+    navbarTitle: "Workout Manager"
 };
 
 export enum DefaultStoreDataNames {
     MUSCLES = "muscles",
-    WORKOUTS = "workouts"
+    WORKOUTS = "workouts",
+    NAVBAR_TITLE = "navbar_title"
 }
 
 @Injectable({

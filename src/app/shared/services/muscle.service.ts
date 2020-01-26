@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Muscle } from '../models/muscle.model';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { DefaultStoreDataNames, Store } from '../store/store';
 import { HttpClient } from '@angular/common/http';
@@ -12,21 +11,14 @@ import { environment } from 'src/environments/environment';
 })
 export class MuscleService {
 
-  constructor(private db: AngularFirestore, private store: Store, private http: HttpClient) { }
+  constructor(private store: Store, private http: HttpClient) { }
 
-  public getFirebaseMuscles(): Observable<Muscle[]>{
-    return this.db.collection<Muscle>('muscle').snapshotChanges().pipe((map(r => {
-      return r.map(d => {
-        return {
-          id: d.payload.doc.id,
-          ...d.payload.doc.data()
-        }
-      })}
-    ))).pipe(
-      map((muscles: Muscle[]) => {
-        this.store.set(DefaultStoreDataNames.MUSCLES, muscles);
-        return muscles;
-    }));
+  public createMuscle(muscle: Partial<Muscle>): Observable<Muscle>{
+    return this.http.post<Muscle>(`${environment.apiUrl}/muscles`, muscle);
+  }
+
+  public editMuscle(muscle: Muscle): Observable<Muscle>{
+    return this.http.put<Muscle>(`${environment.apiUrl}/muscles/${muscle.id}`, muscle);
   }
 
   public getLocalMuscles(): Observable<Muscle[]>{
@@ -34,6 +26,10 @@ export class MuscleService {
   }
 
   public getMuscles(): Observable<Muscle[]>{
-    return this.http.get<Muscle[]>(`${environment.apiUrl}/muscles`);
+    return this.http.get<Muscle[]>(`${environment.apiUrl}/muscles`)
+    .pipe(map(muscles => {
+      this.store.set(DefaultStoreDataNames.MUSCLES, muscles);
+      return muscles;
+    }));
   }
 }

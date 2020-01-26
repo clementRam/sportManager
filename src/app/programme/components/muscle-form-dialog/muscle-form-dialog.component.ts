@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Workout } from 'src/app/shared/models/workout.model';
-import { Muscle } from 'src/app/shared/models/muscle.model';
 import { Store, DefaultStoreDataNames } from 'src/app/shared/store/store';
 import { Observable } from 'rxjs';
 import { MuscleService } from 'src/app/shared/services/muscle.service';
@@ -15,11 +14,9 @@ import { MuscleService } from 'src/app/shared/services/muscle.service';
 export class MuscleFormDialogComponent implements OnInit {
 
   muscleForm = this.fb.group({
-    name: ['', Validators.required],
-    workout: ['', Validators.required]
+    name: ['', Validators.required]
   });
   workouts$: Observable<Workout[]>;
-  muscles$: Observable<Muscle[]>;
 
   constructor(
     public dialogRef: MatDialogRef<MuscleFormDialogComponent>, 
@@ -31,12 +28,13 @@ export class MuscleFormDialogComponent implements OnInit {
 
   ngOnInit() {
     this.workouts$ = this.store.select<Workout[]>(DefaultStoreDataNames.WORKOUTS);
-    this.muscles$ = this.muscleService.getMuscles();
   }
 
   onSubmit(){
     if(this.muscleForm.valid){
-
+      this.muscleService.createMuscle(this.muscleForm.value).subscribe(() => this.muscleService.getMuscles());
+    } else {
+      this.muscleForm.markAllAsTouched();
     }
   }
 }

@@ -4,13 +4,19 @@ import { IsAuthenticateGuardGuard } from './core/guard/is-authenticate-guard.gua
 
 const routes: Routes = [
   {
-    path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+    path: 'programmes',
+    loadChildren: () => import('./programme/programme.module').then(m => m.ProgrammeModule),
     canActivate: [IsAuthenticateGuardGuard]
   },
   {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [IsAuthenticateGuardGuard],
+  },
+  {
     path: '',
-    loadChildren: () => import('./core/core.module').then(m => m.CoreModule)
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
   },
 ];
 

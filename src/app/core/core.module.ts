@@ -15,7 +15,6 @@ import { MatMenuModule } from '@angular/material/menu';
     CoreRoutingModule,
     CommonModule,
     MatToolbarModule,
-    MatMenuModule,
     SharedModule
   ],
   exports: [

@@ -1,27 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { WorkoutService } from 'src/app/shared/services/workout.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { Workout } from 'src/app/shared/models/workout.model';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { WorkoutService } from 'src/app/shared/services/workout.service';
 import { MatDialog } from '@angular/material/dialog';
-import { WorkoutDialogComponent } from '../workout-dialog/workout-dialog.component';
 import { MuscleFormDialogComponent } from '../muscle-form-dialog/muscle-form-dialog.component';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Store, DefaultStoreDataNames } from 'src/app/shared/store/store';
+import { WorkoutDialogComponent } from '../workout-dialog/workout-dialog.component';
 
 @Component({
-  selector: 'app-workouts',
-  templateUrl: './workouts.component.html',
-  styleUrls: ['./workouts.component.scss']
+  selector: 'app-workout',
+  templateUrl: './workout.component.html',
+  styleUrls: ['./workout.component.scss']
 })
-export class WorkoutsComponent implements OnInit {
+export class WorkoutComponent implements OnInit {
 
-  workouts$: Observable<Workout[]>;
+  @Input('workout')
+  workout: Workout;
 
   constructor(private workoutService: WorkoutService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.workouts$ = this.workoutService.getWorkouts();
   }
 
   public drop(event: CdkDragDrop<string[]>): void {
@@ -39,15 +36,17 @@ export class WorkoutsComponent implements OnInit {
     this.dialog.open(MuscleFormDialogComponent);
   }
 
-  public openDialogEditWorkout(workout?: Workout): void{
-    this.dialog.open(WorkoutDialogComponent, {
+  public openDialogEditWorkout(): void{
+    const dialogRef = this.dialog.open(WorkoutDialogComponent, {
       data: {
-        workout: workout
+        workout: this.workout
       }
     });
+    dialogRef.afterClosed().subscribe(w => this.workout = w);
   }
 
-  public deleteWorkout(workout: Workout): void{
-    this.workoutService.deleteWorkout(workout.id);
+  public deleteWorkout(): void{
+    this.workoutService.deleteWorkout(this.workout.id).subscribe(() => this.workoutService.getWorkouts().subscribe());
   }
+
 }

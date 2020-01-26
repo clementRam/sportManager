@@ -4,5 +4,6 @@ import { Muscle } from '../models/muscle.model';
 export interface State {
     workouts: Workout[];
     muscles: Muscle[];
+    navbarTitle: string;
 }
 

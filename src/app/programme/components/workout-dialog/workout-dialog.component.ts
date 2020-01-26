@@ -25,7 +25,7 @@ export class WorkoutDialogComponent implements OnInit {
     ){}
 
   ngOnInit() {
-    if(this.data.workout) {
+    if(this.data && this.data.workout) {
       this.workout = this.data.workout;
       this.workoutForm.patchValue(this.workout);
     }
@@ -35,15 +35,17 @@ export class WorkoutDialogComponent implements OnInit {
     if(this.workoutForm.valid){
       if(this.workout) {
         const workoutUpdated = {...this.workout, ...this.workoutForm.value};
-        this.workoutService.updateWorkout(workoutUpdated).subscribe(() => this.dialogRef.close());
+        this.workoutService.updateWorkout(workoutUpdated).subscribe(workout => {
+          this.dialogRef.close(workout);
+        });
       } else {
-        this.workoutService.addWorkout(this.workoutForm.value).subscribe(() => this.dialogRef.close());
+        this.workoutService.addWorkout(this.workoutForm.value).subscribe(() => {
+          this.dialogRef.close();
+          this.workoutService.getWorkouts().subscribe();
+        });
       }
     } else {
       this.workoutForm.markAllAsTouched();
     }
   }
-
-  private 
-
 }

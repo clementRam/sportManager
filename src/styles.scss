@@ -19,3 +19,8 @@ div.container{
 .text-center{
     text-align: center;
 }
+
+button:focus{
+    border: none;
+    outline: none;
+}

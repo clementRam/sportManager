@@ -1,15 +1,10 @@
-.workout-list-container{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.grid{
-    padding: 2.5%;
-}
-
 .workout-container, .btn-container{
     width: 250px;
     display: inline-block;
+}
+
+.btn-container{
+    padding-top: 15px;
 }
 
 .muscles-container{

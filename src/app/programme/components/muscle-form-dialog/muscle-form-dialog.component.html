@@ -2,22 +2,20 @@
 <form [formGroup]="muscleForm" (ngSubmit)="onSubmit()">
     <div>
         <mat-form-field>
-            <mat-label>Muscle</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let muscle of muscles$ | async" [value]="muscle">
-                    {{muscle.name}}
-                </mat-option>
-            </mat-select>
+            <input matInput formControlName="name" placeholder="Name">
         </mat-form-field>
     </div>
     <div>
-        <mat-form-field>
+        <!-- <mat-form-field>
             <mat-label>Workout</mat-label>
             <mat-select>
                 <mat-option *ngFor="let workout of workouts$ | async" [value]="workout">
                     {{workout.name}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
+    </div>
+    <div class="text-center">
+        <button type="submit" mat-raised-button color="primary">Add workout</button>
     </div>
 </form>
