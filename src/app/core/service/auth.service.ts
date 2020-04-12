@@ -27,6 +27,7 @@ export class AuthService {
   }
 
   public isAuthenticate(): boolean {
-    return localStorage.getItem(USER_LOCAL_STORAGE_NAME) !== null;
+    return true;
+    // return localStorage.getItem(USER_LOCAL_STORAGE_NAME) !== null;
   }
 }

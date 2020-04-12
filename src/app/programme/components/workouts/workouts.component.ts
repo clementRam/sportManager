@@ -15,19 +15,20 @@ import { Programme } from 'src/app/shared/models/programme.model';
 })
 export class WorkoutsComponent implements OnInit {
 
-  programme$: Observable<Programme>;
+  programme: Programme;
 
   constructor(
     private programmeService: ProgrammeService,
     private store: Store, 
     public dialog: MatDialog, 
-    private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.store.set(DefaultStoreDataNames.NAVBAR_TITLE, "Programme");
     this.route.params.subscribe(params => {
-      this.programme$ = this.programmeService.getProgramme(params['programmeId']);
+      this.programmeService.getProgramme(params['programmeId']).subscribe(p => {
+        this.programme = p;
+        this.store.set(DefaultStoreDataNames.NAVBAR_TITLE, this.programme.name);
+      });
     });
   }
 

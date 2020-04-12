@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgrammeService } from 'src/app/shared/services/programme.service';
 import { Observable } from 'rxjs';
 import { Programme } from 'src/app/shared/models/programme.model';
 import { DefaultStoreDataNames, Store } from 'src/app/shared/store/store';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,13 +12,13 @@ import { DefaultStoreDataNames, Store } from 'src/app/shared/store/store';
 })
 export class DashboardComponent implements OnInit {
 
-  programmes$: Observable<Programme[]>;
-
-  constructor(private programmeService: ProgrammeService, private store: Store) { }
+  constructor(private store: Store, private router: Router) { }
 
   ngOnInit() {
-    this.programmes$ = this.programmeService.getProgrammes();
     this.store.set(DefaultStoreDataNames.NAVBAR_TITLE, "Workout Manager");
   }
 
+  handleClickItem(item: string): void{
+    this.router.navigate([`/${item}`])
+  }
 }

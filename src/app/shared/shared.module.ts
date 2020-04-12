@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
+import {MatListModule} from '@angular/material/list';
 @NgModule({
   declarations: [],
   imports: [
@@ -23,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatSnackBarModule,
     MatSelectModule,
-
+    MatListModule,
   ],
   exports: [
     HttpClientModule,
@@ -35,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatMenuModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatListModule
   ]
 })
 export class SharedModule { }

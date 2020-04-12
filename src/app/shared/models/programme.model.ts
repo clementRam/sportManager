@@ -1,7 +1,7 @@
 import { Workout } from './workout.model';
 
 export interface Programme{
-    id: string;
+    id: number;
     name: string;
     workouts: Workout[];
 }

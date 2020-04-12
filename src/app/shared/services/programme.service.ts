@@ -19,7 +19,15 @@ export class ProgrammeService {
     return this.http.get<Programme>(`${environment.apiUrl}/programmes/${id}`);
   }
 
-  deleteProgramme(id: string): Observable<String>{
+  createProgramme(programme: Partial<Programme>): Observable<Programme>{
+    return this.http.post<Programme>(`${environment.apiUrl}/programmes`, programme);
+  }
+
+  updateProgramme(programme: Programme): Observable<Programme>{
+    return this.http.put<Programme>(`${environment.apiUrl}/programmes/${programme.id}`, programme);
+  }
+
+  deleteProgramme(id: number): Observable<String>{
     return this.http.delete<String>(`${environment.apiUrl}/programmes/${id}`)
   }
 

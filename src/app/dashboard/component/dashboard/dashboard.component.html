@@ -1,5 +1,5 @@
-<div class="row">
-    <div *ngFor="let programme of programmes$ | async" class="col-12 col-sm-6">
-        <app-programme [programme]="programme"></app-programme>
-    </div>
-</div>
+<mat-action-list>
+    <button mat-list-item (click)="handleClickItem('programmes')">Programmes</button>
+    <button mat-list-item>Module 2</button>
+    <button mat-list-item>Module 3</button>
+</mat-action-list>

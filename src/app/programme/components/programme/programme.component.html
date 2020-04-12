@@ -1,0 +1,4 @@
+<mat-action-list>
+    <button mat-list-item *ngFor="let workout of programme?.workouts" (click)="handleClickWorkout(workout)">{{workout.name}}</button>
+    <button mat-list-item (click)="handleClickAddWorkout()">Add workout</button>
+</mat-action-list>

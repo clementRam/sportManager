@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:8080/workout-manager",
+  apiUrl: "http://localhost:8080/sport-manager-api",
 };
 
 /*

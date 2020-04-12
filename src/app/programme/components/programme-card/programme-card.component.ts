@@ -4,11 +4,11 @@ import { ProgrammeService } from 'src/app/shared/services/programme.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-programme',
-  templateUrl: './programme.component.html',
-  styleUrls: ['./programme.component.scss']
+  selector: 'app-programme-card',
+  templateUrl: './programme-card.component.html',
+  styleUrls: ['./programme-card.component.scss']
 })
-export class ProgrammeComponent implements OnInit {
+export class ProgrammeCardComponent implements OnInit {
 
   @Input()
   programme: Programme;

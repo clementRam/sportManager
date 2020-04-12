@@ -30,7 +30,7 @@ export class WorkoutService {
     return this.http.put<Workout>(`${environment.apiUrl}/workouts/${workout.id}`, workout);
   }
 
-  public deleteWorkout(id: string): Observable<String>{
+  public deleteWorkout(id: number): Observable<String>{
     return this.http.delete<String>(`${environment.apiUrl}/workouts/${id}`);
   }
 }

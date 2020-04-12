@@ -9,6 +9,11 @@ import { WorkoutDialogComponent } from './components/workout-dialog/workout-dial
 import { MuscleFormDialogComponent } from './components/muscle-form-dialog/muscle-form-dialog.component';
 import { WorkoutComponent } from './components/workout/workout.component';
 import { ProgrammeRoutingModule } from './programme-routing.module';
+import { ProgrammeCardComponent } from './components/programme-card/programme-card.component';
+import { ProgrammesComponent } from './components/programmes/programmes.component';
+import { ProgrammeDialogComponent } from './components/programme-dialog/programme-dialog.component';
+import { ProgrammeComponent } from './components/programme/programme.component';
+import { WorkoutFormDialogComponent } from './components/workout-form-dialog/workout-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +21,12 @@ import { ProgrammeRoutingModule } from './programme-routing.module';
     WorkoutsComponent, 
     WorkoutDialogComponent,
     MuscleFormDialogComponent,
-    WorkoutComponent
+    WorkoutComponent,
+    ProgrammeCardComponent,
+    ProgrammesComponent,
+    ProgrammeDialogComponent,
+    ProgrammeComponent,
+    WorkoutFormDialogComponent
   ],
   imports: [
     ProgrammeRoutingModule,
@@ -27,7 +37,9 @@ import { ProgrammeRoutingModule } from './programme-routing.module';
   ],
   entryComponents: [
     WorkoutDialogComponent,
-    MuscleFormDialogComponent
+    MuscleFormDialogComponent,
+    ProgrammeDialogComponent,
+    WorkoutFormDialogComponent
   ]
 })
 export class ProgrammeModule { }
