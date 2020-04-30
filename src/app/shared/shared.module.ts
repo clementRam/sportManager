@@ -12,7 +12,6 @@ import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import {MatListModule} from '@angular/material/list';
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     HttpClientModule,

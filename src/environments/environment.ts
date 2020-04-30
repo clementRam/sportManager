@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:8080/sport-manager-api",
+  useLocalData: true,
+  apiUrl: "http://localhost:8080/sport-manager-api"
 };
 
 /*

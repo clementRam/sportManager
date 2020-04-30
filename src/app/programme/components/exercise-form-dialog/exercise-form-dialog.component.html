@@ -1,22 +1,22 @@
 <div mat-dialog-content>
     <div class="text-center">
         <div>
-            Select an existed workout
+            Select an existed exercise
         </div>
-        <form [formGroup]="workoutExistedForm">
+        <form [formGroup]="exerciseExistedForm">
             <mat-form-field>
-                <mat-label>Workout</mat-label>
-                <mat-select formControlName="workout">
-                    <mat-option *ngFor="let workout of workouts$ | async" [value]="workout">
-                        {{workout.name}}
+                <mat-label>Exercise</mat-label>
+                <mat-select formControlName="exercise">
+                    <mat-option *ngFor="let workout of exercises$ | async" [value]="workout">
+                        {{exercise.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
         </form>
         <div class="mt-3">
-            Or create a new workout
+            Or create a new exercise
         </div>
-        <form [formGroup]="newWorkoutForm">
+        <form [formGroup]="newExerciseForm">
             <mat-form-field>
                 <input matInput formControlName="name" placeholder="Name">
             </mat-form-field>
@@ -26,6 +26,6 @@
 <div mat-dialog-actions>
     <div class="text-center w-100">
         <button (click)="onCancel()" mat-button color="primary">Cancel</button>
-        <button (click)="onSubmit()" type="submit" mat-raised-button color="primary">{{ workout ? 'Edit' : 'Add' }}</button>
+        <button (click)="onSubmit()" type="submit" mat-raised-button color="primary">{{ exercise ? 'Edit' : 'Add' }}</button>
     </div>
 </div>

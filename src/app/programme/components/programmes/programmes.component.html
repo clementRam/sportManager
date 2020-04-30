@@ -1,4 +1,4 @@
 <mat-action-list>
     <button mat-list-item *ngFor="let programme of programmes$ | async" (click)="handleClickProgramme(programme)">{{programme.name}}</button>
-    <button mat-list-item (click)="handleClickAddProgramme()">Ajouter un programme</button>
+    <button class="mat-secondary" mat-list-item (click)="handleClickAddProgramme()">Add a programme</button>
 </mat-action-list>

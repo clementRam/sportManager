@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Workout } from 'src/app/shared/models/workout.model';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WorkoutService } from 'src/app/shared/services/workout.service';
+import { Workout } from 'src/app/shared/models/workout.model';
+import { Exercise } from 'src/app/shared/models/exercise.model';
 import { MatDialog } from '@angular/material/dialog';
-import { MuscleFormDialogComponent } from '../muscle-form-dialog/muscle-form-dialog.component';
-import { WorkoutDialogComponent } from '../workout-dialog/workout-dialog.component';
+import { ExerciseFormDialogComponent } from '../exercise-form-dialog/exercise-form-dialog.component';
+import { Store, DefaultStoreDataNames } from 'src/app/shared/store/store';
 
 @Component({
   selector: 'app-workout',
@@ -13,40 +14,40 @@ import { WorkoutDialogComponent } from '../workout-dialog/workout-dialog.compone
 })
 export class WorkoutComponent implements OnInit {
 
-  @Input('workout')
   workout: Workout;
+  routePrams: Object;
 
-  constructor(private workoutService: WorkoutService, public dialog: MatDialog) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private workoutService: WorkoutService, 
+    private router: Router, 
+    private dialog: MatDialog,
+    private store: Store) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.routePrams = params;
+      this.workoutService.getWorkout(parseInt(params['workoutId'])).subscribe(workout => {
+        this.workout = workout;
+        if(this.workout){
+          this.store.set(DefaultStoreDataNames.NAVBAR_TITLE, this.workout.name);
+        }
+    });
+  })
   }
 
-  public drop(event: CdkDragDrop<string[]>): void {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-    }
+  handleClickExercise(exercise: Exercise): void {
+    this.router.navigate([`/programmes/${this.routePrams['programmeId']}/workouts/${this.workout.id}/exercises/${exercise.id}`])
   }
 
-  public openAddMuscleDialog(){
-    this.dialog.open(MuscleFormDialogComponent);
-  }
-
-  public openDialogEditWorkout(): void{
-    const dialogRef = this.dialog.open(WorkoutDialogComponent, {
-      data: {
-        workout: this.workout
+  handleClickAddExercise(): void{
+    this.dialog.open(ExerciseFormDialogComponent).afterClosed().subscribe(exercise => {
+      if(exercise){
+        let workoutUpdated = Object.assign({}, this.workout);
+        workoutUpdated.exercises = [...workoutUpdated.exercises, exercise];
+        this.workoutService.updateWorkout(workoutUpdated).subscribe(workout => this.workout = workout);
       }
     });
-    dialogRef.afterClosed().subscribe(w => this.workout = w);
-  }
-
-  public deleteWorkout(): void{
-    this.workoutService.deleteWorkout(this.workout.id).subscribe(() => this.workoutService.getWorkouts().subscribe());
   }
 
 }

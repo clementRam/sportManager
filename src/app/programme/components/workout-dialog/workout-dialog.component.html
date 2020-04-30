@@ -1,9 +1,0 @@
-<h2>{{ workout ? 'Edit' : 'Add' }}  workout</h2>
-<form [formGroup]="workoutForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-        <input matInput formControlName="name" placeholder="Name">
-    </mat-form-field>
-    <div class="text-center">
-        <button type="submit" mat-raised-button color="primary">{{ workout ? 'Edit' : 'Add' }} workout</button>
-    </div>
-</form>

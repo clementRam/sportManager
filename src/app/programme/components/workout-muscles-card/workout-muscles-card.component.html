@@ -1,0 +1,26 @@
+<div class="workout-container">
+    <div class="title-container">
+        <h2>{{ workout?.name }}</h2>
+        <button mat-icon-button  [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDialogEditWorkout(workout)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="deleteWorkout()">
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+            </button>
+        </mat-menu>
+    </div>
+    <div
+    cdkDropList
+    [cdkDropListData]="workout?.muscles"
+    (cdkDropListDropped)="drop($event)"
+    class="muscles-container">
+    <div *ngFor="let muscle of workout?.muscles" cdkDrag>
+        <app-muscle [muscle]="muscle"></app-muscle>
+    </div>
+</div>

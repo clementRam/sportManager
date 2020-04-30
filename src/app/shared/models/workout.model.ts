@@ -1,8 +1,7 @@
-import { Muscle } from './muscle.model';
+import { Exercise } from './exercise.model';
 
 export interface Workout {
     id: number;
-    index: number;
     name: string;
-    muscles: Muscle[]
+    exercises: Exercise[]
 }

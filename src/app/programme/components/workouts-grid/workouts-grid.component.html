@@ -1,0 +1,9 @@
+<div cdkDropListGroup class="workout-list-container">
+    <div *ngFor="let workout of programme.workouts" class="grid">
+      <app-workout-muscles-card></app-workout-muscles-card>
+    </div>
+    <div class="btn-container">
+        <button mat-raised-button color="primary"><mat-icon>add</mat-icon>Add workout</button>
+    </div>
+</div>
+<button mat-mini-fab color="primary" class="btn-add-muscle" (click)="openAddMuscleDialog()"><mat-icon>add</mat-icon></button>

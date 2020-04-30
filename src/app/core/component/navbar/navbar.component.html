@@ -1,13 +1,16 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
     <mat-toolbar-row>
         <div class="container">
             <div class="row">
                 <div class="col col-sm-12 d-flex">
-                    <button *ngIf="canGoBack" class="btn-go-back" mat-button (click)="clickGoBack()">
+                    <button *ngIf="canGoBack" class="btn-go-back p-0" mat-button (click)="clickGoBack()">
                         <mat-icon>arrow_back_ios</mat-icon>
                     </button>
                     <span>{{navbarTitle}}</span>
                     <span class="spacer"></span>
+                    <button class="btn-settings p-0" mat-button>
+                        <mat-icon>settings</mat-icon>
+                    </button>
                     <!-- <mat-icon aria-hidden="false" aria-label="Example thumbs up SVG icon" (click)="onClickExit()">exit_to_app</mat-icon> -->
                 </div>
             </div>

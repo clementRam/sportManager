@@ -25,7 +25,7 @@ export class ProgrammeComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.programmeService.getProgramme(params['programmeId']).subscribe(p => {
+      this.programmeService.getProgramme(parseInt(params['programmeId'])).subscribe(p => {
         this.programme = p;
         this.store.set(DefaultStoreDataNames.NAVBAR_TITLE, this.programme.name);
       });
@@ -33,16 +33,18 @@ export class ProgrammeComponent implements OnInit {
   }
 
   handleClickWorkout(workout: Workout): void {
-    this.router.navigate([`/workouts/${workout.id}`])
+    this.router.navigate([`/programmes/${this.programme.id}/workouts/${workout.id}`])
   }
 
   handleClickAddWorkout(): void{
     this.dialog.open(WorkoutFormDialogComponent, {
       width: '400px'
     }).afterClosed().subscribe(workout => {
-      let programmeUpdated = Object.assign({}, this.programme);
-      programmeUpdated.workouts = [...programmeUpdated.workouts, workout];
-      this.programmeService.updateProgramme(programmeUpdated).subscribe(programme => this.programme = programme)
+      if(workout){
+        let programmeUpdated = Object.assign({}, this.programme);
+        programmeUpdated.workouts = [...programmeUpdated.workouts ? programmeUpdated.workouts : [], workout];
+        this.programmeService.updateProgramme(programmeUpdated).subscribe(programme => this.programme = programme)
+      }
     });
   }
 
